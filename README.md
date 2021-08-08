@@ -124,3 +124,13 @@ $('#join--submit').on('click', function() {
 	});
 });
 </script>
+
+	
+
+	
+	
+	
+	
+	
+taglib 참고 	
+https://www.baeldung.com/spring-security-taglibs
