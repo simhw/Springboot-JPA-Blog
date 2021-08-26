@@ -41,15 +41,19 @@ let index = {
 			
 		});
 	},
+	
+	
 	// 회원수정 
 	update: function(){
 		let data = {
 			id:$('#id').val(),
+			username:$('#username').val(),
 			password:$('#password').val(),
 			email:$('#email').val()	
 			
 		}
 		console.log(id + " " + password  + " " + email);
+		
 		$.ajax({
 			type: "PUT",
 			url: "/user",

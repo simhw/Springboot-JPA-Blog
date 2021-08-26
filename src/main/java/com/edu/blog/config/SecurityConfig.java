@@ -3,6 +3,7 @@ package com.edu.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,11 +22,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PrincipalDetailService principalDetailService;
 	
-	// 비밀번호를 해쉬 암호화해준다. 
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		
+		return super.authenticationManagerBean();
+	}
+
 	@Bean	// IoC
 	public BCryptPasswordEncoder encode() {
+		// 비밀번호를 해쉬 암호화해준다. 
 		return new BCryptPasswordEncoder();
-		
 	}
 	
 	@Override
