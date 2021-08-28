@@ -13,8 +13,7 @@ public class UserController {
 	
 	
 	// 인증이 안된 사용자들이 출입할 수 있는 경로를 /auth/로 허용해준다. 
-	
-	
+
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
 
@@ -26,6 +25,8 @@ public class UserController {
 		
 		return "user/loginForm";
 	}
+	
+	
 	
 	@GetMapping("/user/updateForm")
 	public String updateForm() {

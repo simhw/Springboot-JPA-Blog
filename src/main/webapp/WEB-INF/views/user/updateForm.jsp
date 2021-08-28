@@ -7,9 +7,10 @@
 <div class="container">
 	<form>
 	<input type="hidden" id="id" value="${principal.user.id}"/>
+		
 		<div class="form-group">
 			<label for="username">USERNAME</label> 
-			<input type="text" value="${principal.user.username}"class="form-control" id="username" placeholder="Enter Username" name="username" readonly="readonly">
+			<input type="text" value="${principal.user.username}"class="form-control" id="username" name="username" readonly="readonly">
 		</div>
 
 		<div class="form-group">
@@ -19,7 +20,7 @@
 		
 		<div class="form-group">
 			<label for="email">EMAIL</label> 
-			<input type="email" value='${principal.user.email}' class="form-control" id="email" placeholder="Enter email" name="email">
+			<input type="email" value='${principal.user.email}' class="form-control" id="email" name="email">
 		</div>
 	</form>
 	
