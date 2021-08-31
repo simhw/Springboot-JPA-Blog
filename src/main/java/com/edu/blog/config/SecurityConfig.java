@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean	// IoC
 	public BCryptPasswordEncoder encode() {
+		
 		// 비밀번호를 해쉬 암호화해준다. 
 		return new BCryptPasswordEncoder();
 	}

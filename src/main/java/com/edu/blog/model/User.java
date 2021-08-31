@@ -33,7 +33,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 	// 데이터베이스의 전략을 따라간다.
 	private int id; 	//auto_increment
 	
-	@Column(nullable = false, length = 30, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String username; 
 	
 	@Column(nullable = false, length = 100) 
@@ -42,11 +42,13 @@ public class User {
 	@Column(nullable = false, length = 50)
 	private String email;
 	
-	
 	//@ColumnDefault("'user'") // varchar
 	// 데이터베이스에는 RoleType이 존재하지 않기 때문에 string 타입을 명시해준다.  
 	@Enumerated(EnumType.STRING)
 	private RoleType role; 
+	
+
+	private String oauth;
 	
 	@UpdateTimestamp // 현재 시간 자동 입력해준다. 
 	private LocalDateTime createdTime;

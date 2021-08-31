@@ -1,5 +1,8 @@
 package com.edu.blog.model;
 
+import lombok.Data;
+
+@Data
 public class OAuthToken {
 
 	

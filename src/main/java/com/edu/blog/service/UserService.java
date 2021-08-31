@@ -45,22 +45,41 @@ public class UserService {
 	@Transactional
 	public void 회원수정(User user) {
 		
-		// 영속성 컨텍스트 User 인스턴스를 영속화시키고, 영속화된 User 인스턴스를 수정한다. 	
-		User persistance = userRepository.findById(user.getId()).orElseThrow(() -> {
+
+		// 영속성 컨텍스트의 User를 영속화시키고, 영속화된 User를 수정한다. 	
+		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
 			return new IllegalArgumentException("회원 찾기 실패");
 			}
 		);
 		
-		// 해쉬 비밀번호 
-		String rawPassword = user.getPassword();
-		String encPassword = encoder.encode(rawPassword);	
-		
-		persistance.setPassword(encPassword);
-		persistance.setEmail(user.getEmail());
+		// 유효성 검사
+		if(persistance.getOauth() == null) {
+			
+			String rawPassword = user.getPassword();
+			// 해쉬 비밀번호 
+			String encPassword = encoder.encode(rawPassword);	
+			
+			persistance.setPassword(encPassword);
+			persistance.setEmail(user.getEmail());
+			
+		}
 		
 		
 		// 회원수정 종료 = Service 종료 = Transaction 종료 = Commit 자동 수행
 		// 영속화된 persistance 객체의 변화가 감지되면 update문을 자동으로 수행한다. 
+		
+	}
+
+
+	@Transactional(readOnly = true)
+	public User 회원찾기(String username) {
+	
+		User user = userRepository.findByUsername(username).orElseGet(()->{
+			return new User();
+		});
+		
+		
+		return user;
 		
 	}
 	
