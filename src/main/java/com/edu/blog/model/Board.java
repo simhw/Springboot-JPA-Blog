@@ -46,8 +46,8 @@ public class Board {
 	private int count;
 	
 	// Many = Board, One = User
-	// 데이터베이스는 객체를 저장할 수 없다.
-	// 객체를 데이터베이스에 저장할 때 필드 값을 지정해준다. 
+	
+	// 데이터베이스는 객체를 저장할 수 없으므로 저장할 때 필드 값을 지정해준다. 
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name = "userId")
 	private User user;	
@@ -56,7 +56,7 @@ public class Board {
 	// 외래키가 아니고 Reply에 있는 Board가 외래키이다. 
 	// 조인을 통해 값을 얻기 위한 변수이다. 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-	private List<Reply> reply;
+	private List<Reply> replies;
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;

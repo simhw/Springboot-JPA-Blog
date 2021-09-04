@@ -20,6 +20,7 @@ public class BoardController {
 	// 시작 화면 이동
 	@GetMapping({ "/", "" })
 	public String index(Model model, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		
 		model.addAttribute("boards", boardService.글목록(pageable));
 		return "index";
 		// 해당 페이지로 모델의 정보를 들고간다.
@@ -28,6 +29,7 @@ public class BoardController {
 	// 글 쓰기 화면 이동
 	@GetMapping("board/saveForm")
 	public String saveForm() {
+		
 		return "board/saveForm";
 
 	}
@@ -35,14 +37,18 @@ public class BoardController {
 	// 글 상세보기 화면 이동
 	@GetMapping("board/{id}")
 	public String findById(@PathVariable int id, Model model) {
+		
 		model.addAttribute("board", boardService.글상세보기(id));
 		return "/board/detail";
+	
 	}
 
 	// 글 수정 화면 이동
 	@GetMapping("board/{id}/updateForm")
 	public String updateForm(@PathVariable int id, Model model) {
+		
 		model.addAttribute("board", boardService.글상세보기(id));
 		return "/board/updateForm";
+	
 	}
 }
