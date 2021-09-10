@@ -29,13 +29,16 @@ public class Reply {
 	private int id; // PK
 	
 	@Column(nullable = false, length = 200)
-	private String Content;
+	private String content;
 	
-	@ManyToOne	// Many = Reply, One = Board
+	// Reply : Board = n : 1
+	@ManyToOne	
 	@JoinColumn(name = "boardId")
 	private Board board; // FK
 	
-	@ManyToOne // Many = Reply, One = User
+	
+	// Reply : User = n : 1
+	@ManyToOne 
 	@JoinColumn(name = "userId")
 	private User user;
 	

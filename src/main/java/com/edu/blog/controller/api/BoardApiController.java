@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.edu.blog.config.auth.PrincipalDetail;
 import com.edu.blog.dto.ResponseDto;
 import com.edu.blog.model.Board;
-
+import com.edu.blog.model.Reply;
 import com.edu.blog.service.BoardService;
 //rest controller 
 //값을 반환 
@@ -42,15 +42,28 @@ public class BoardApiController {
 	public ResponseDto<Integer> deleteById(@PathVariable int id, @AuthenticationPrincipal PrincipalDetail principal) {
 		
 		boardService.글삭제(id, principal);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // Http 통신 상태를 출력해준다.
-
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+		
 	}
 	
 	@PutMapping("/api/board/{id}")
 	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
 
 		boardService.글수정(id, board, principal);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); // Http 통신 상태를 출력해준다.
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+
+	}
+	
+	// 	url: `/api/board/${boardId}/reply`
+	
+	
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+		
+		System.out.println(reply.getContent());
+		
+		boardService.댓글쓰기(principal.getUser(), boardId, reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 
 	}
 }

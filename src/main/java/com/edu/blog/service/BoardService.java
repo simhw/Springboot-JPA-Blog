@@ -8,9 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.blog.config.auth.PrincipalDetail;
 import com.edu.blog.model.Board;
-
+import com.edu.blog.model.Reply;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.BoardRepository;
+import com.edu.blog.repository.ReplyRepository;
 
 // 트랜잭션을 관리해준다.
 // 다수의 기능들(CRUD)을 하나의 서비스로 처리하기 위해 사용된다. 
@@ -23,6 +24,9 @@ public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 
 	@Transactional
 	public void 글쓰기(Board board, User user) { // title, content, user
@@ -64,7 +68,7 @@ public class BoardService {
 		
 		// Persistence Context 
 		Board board = boardRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("아이디를 찾을 수 없습니다.");
+			return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
 		});
 		
 		if(board.getUser().getId() != principal.getUser().getId()) {
@@ -78,4 +82,26 @@ public class BoardService {
 		// Spring Dirty Checking이 변화를 자동으로 감지하고 자동으로 commit된다.  
 	
 	}
+	
+
+	@Transactional
+	public void 댓글쓰기(User user, int boardId, Reply requestReply) {
+		// TODO Auto-generated method stub
+
+		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
+		});
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);
+		
+		
+	}
+	
+	
+
+	
+	
 }

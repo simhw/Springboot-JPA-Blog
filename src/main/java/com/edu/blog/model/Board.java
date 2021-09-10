@@ -13,9 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,8 +48,8 @@ public class Board {
 	// 기본 값 정수형
 	private int count;
 	
-	// Many = Board, One = User
 	
+	// Board : User = n : 1
 	// 데이터베이스는 객체를 저장할 수 없으므로 저장할 때 필드 값을 지정해준다. 
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name = "userId")
@@ -56,6 +59,8 @@ public class Board {
 	// 외래키가 아니고 Reply에 있는 Board가 외래키이다. 
 	// 조인을 통해 값을 얻기 위한 변수이다. 
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"board"})
+	@OrderBy("id desc")
 	private List<Reply> replies;
 	
 	@CreationTimestamp

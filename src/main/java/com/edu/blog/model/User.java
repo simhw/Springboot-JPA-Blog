@@ -51,6 +51,6 @@ public class User {
 	private String oauth;
 	
 	@UpdateTimestamp // 현재 시간 자동 입력해준다. 
-	private LocalDateTime createdTime;
+	private LocalDateTime createdDate;
 	
 }
