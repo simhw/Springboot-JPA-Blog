@@ -44,5 +44,10 @@ public class Reply {
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;
-
+	
+	public void updateReply(String content, User user, Board board) {
+		setContent(content);
+		setUser(user);
+		setBoard(board);
+	}
 }

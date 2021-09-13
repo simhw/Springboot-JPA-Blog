@@ -47,9 +47,11 @@ let index = {
 
 		});
 	},
-	// 삭제 
+	// 게시글 삭제 
 	deleteById: function() {
+		
 		let id = $('#id').val();
+		
 		$.ajax({
 			// 삭제 수행 요청 
 			type: "DELETE",
@@ -68,8 +70,9 @@ let index = {
 		});
 	},
 	
-	// 수정 
+	// 게시글 수정 
 	update: function() {
+		
 		let id = $('#id').val();
 		
 		let data = {
@@ -101,15 +104,16 @@ let index = {
 	replySave: function() {
 		
 		let data = {
+			userId: $('#userId').val(),
+			boardId: $('#boardId').val(),
 			content: $('#reply-content').val()
 		}
 		
-		let boardId = $('#board-id').val();
-		//console.log(data.boardId, data.replyContent);
+		console.log(data.userId, data.boardId, data.replyContent);
 		
 		$.ajax({
 			type: "POST",
-			url: `/api/board/${boardId}/reply`,
+			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
@@ -117,7 +121,7 @@ let index = {
 		}).done(function(resp) {
 			// 응답 실행 
 			alert("저장되었습니다.");
-			location.href = `/board/${boardId}`;
+			location.href = `/board/${data.boardId}`;
 
 		}).fail(function(error) {
 			// 응답 실패 

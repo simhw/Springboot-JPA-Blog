@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.blog.config.auth.PrincipalDetail;
+import com.edu.blog.dto.ReplyRequestDto;
 import com.edu.blog.model.Board;
 import com.edu.blog.model.Reply;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.BoardRepository;
 import com.edu.blog.repository.ReplyRepository;
+import com.edu.blog.repository.UserRepository;
 
 // 트랜잭션을 관리해준다.
 // 다수의 기능들(CRUD)을 하나의 서비스로 처리하기 위해 사용된다. 
@@ -27,6 +29,9 @@ public class BoardService {
 	
 	@Autowired
 	private ReplyRepository replyRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Transactional
 	public void 글쓰기(Board board, User user) { // title, content, user
@@ -86,8 +91,8 @@ public class BoardService {
 
 	@Transactional
 	public void 댓글쓰기(User user, int boardId, Reply requestReply) {
-		// TODO Auto-generated method stub
 
+		// 영속화 
 		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
 			return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
 		});
@@ -99,9 +104,24 @@ public class BoardService {
 		
 		
 	}
-	
-	
 
-	
-	
+	@Transactional
+	public void 댓글쓰기(ReplyRequestDto replyRequestDto) {
+		
+		// 영속화 
+		User user = userRepository.findById(replyRequestDto.getUserId()).orElseThrow(() -> {
+			return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
+		});
+		
+		// 영속화  
+		Board board = boardRepository.findById(replyRequestDto.getBoardId()).orElseThrow(() -> {
+			return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
+		});
+		
+		Reply reply = new Reply();
+		reply.updateReply(replyRequestDto.getContent(), user, board);
+		
+		replyRepository.save(reply);
+		
+	}
 }
