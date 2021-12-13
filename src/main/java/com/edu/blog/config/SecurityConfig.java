@@ -21,8 +21,7 @@ import com.edu.blog.config.auth.PrincipalDetailService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PrincipalDetailService principalDetailService;
-	
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
