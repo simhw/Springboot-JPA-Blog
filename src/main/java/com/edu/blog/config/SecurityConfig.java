@@ -45,20 +45,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http
-			.csrf().disable() // csrf 토큰 비활성화 
-			.authorizeRequests()
-				.antMatchers("/", "/auth/**", "/javascript/**", "/css/**", "/image/**", "/dummy/**")	// /auth 경로로 들어온 모든 요청은 누구나 허용된다.  
-				.permitAll()
-				.anyRequest()	// 그 외 요청은 인증되어야한다. 
-				.authenticated()
-			.and()
-				.formLogin()
-				.loginPage("/auth/loginForm")
-				.loginProcessingUrl("/auth/login")	// 스프링 시큐리티가 해당 주소로 로그인을 가로채서 대신 로그인을 실행한다. 
-				.defaultSuccessUrl("/");
-				// .failureUrl("/fail");
-			
+//		http
+//			.csrf().disable() // csrf 토큰 비활성화
+//			.authorizeRequests()
+//				.antMatchers("/", "/auth/**", "/javascript/**", "/css/**", "/image/**", "/dummy/**")	// /auth 경로로 들어온 모든 요청은 누구나 허용된다.
+//				.permitAll()
+//				.anyRequest()	// 그 외 요청은 인증되어야한다.
+//				.authenticated()
+//			.and()
+//				.formLogin()
+//				.loginPage("/auth/loginForm")
+//				.loginProcessingUrl("/auth/login")	// 스프링 시큐리티가 해당 주소로 로그인을 가로채서 대신 로그인을 실행한다.
+//				.defaultSuccessUrl("/");
+//				// .failureUrl("/fail");
+//
 	}
 
 }
