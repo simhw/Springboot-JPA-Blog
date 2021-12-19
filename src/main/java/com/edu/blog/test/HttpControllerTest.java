@@ -1,5 +1,6 @@
 package com.edu.blog.test;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,22 +12,28 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HttpControllerTest {
     // 웹 브라우저에서만 GET 요청이 가능하다.
-    @GetMapping("/http/get/test")
-    public String getTest() {
+    // GET 방식은 query request 방식으로만 데이터 전송이 가능하다.
+    @GetMapping("/get/test")
+    public String getTest(Member member) {
+        System.out.println("id: " + member.getId());
+        System.out.println("password : " + member.getPassword());
         return "GET Request";
     }
 
-    @PostMapping("/http/post/test")
-    public String postTest() {
-        return "POST Request";
+    @PostMapping("/post/test")
+    public String postTest(@RequestBody Member member) {
+        // MessageConverter 가 자동으로 Member 객체 형태로 매핑해준다.
+        System.out.println("id: " + member.getId());
+        System.out.println("password : " + member.getPassword());
+        return "Post Request";
     }
 
-    @PutMapping("/http/put/test")
-    public String putTeest() {
-        return "PUT Request";
+    @PutMapping("/put/test")
+    public Member putTest(@RequestBody Member member) {
+        return member;
     }
 
-    @DeleteMapping("/http/delete/test")
+    @DeleteMapping("/delete/test")
     public String deleteTest() {
         return "DELETE Request";
     }
