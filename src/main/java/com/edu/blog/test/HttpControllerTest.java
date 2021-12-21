@@ -37,4 +37,15 @@ public class HttpControllerTest {
     public String deleteTest() {
         return "DELETE Request";
     }
+
+    @GetMapping("/lombok/test")
+    public String lombokTest() {
+
+        Member member = Member.builder().id("simsim").password("11234").email("sim@naver.com").build();
+
+        System.out.println("getter: " + member.getId());
+        member.setId("sim");
+        System.out.println("setter : " + member.getId());
+        return "lombokTest!!";
+    }
 }
