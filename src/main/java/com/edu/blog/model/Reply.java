@@ -1,5 +1,6 @@
 package com.edu.blog.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -18,32 +19,39 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@NoArgsConstructor	// 기본 생성자 
-@AllArgsConstructor	// 모든 변수의 생성자 
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
-@Entity // Reply 클래스가 MySQL 테이블에 생성된다
+@Entity
 public class Reply {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; // PK
+	private int id;
 	
+
 	@Column(nullable = false, length = 200)
 	private String content;
-	
-	// Reply : Board = n : 1
+
+
+	// ** ORM **
+	// Reply : Board = N : 1
 	@ManyToOne	
-	@JoinColumn(name = "boardId")
-	private Board board; // FK
-	
-	
-	// Reply : User = n : 1
+	@JoinColumn(name = "board_id")
+	private Board board;
+
+
+	// ** ORM **
+	// Reply : User = N : 1
 	@ManyToOne 
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
+
+
 	@CreationTimestamp
-	private LocalDateTime createDate;
+	private Timestamp createDate;
 	
 	public void updateReply(String content, User user, Board board) {
 		setContent(content);

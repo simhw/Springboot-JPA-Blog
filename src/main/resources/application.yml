@@ -2,28 +2,36 @@ server:
   port: 8080
   servlet:
     context-path: /
-    encoding: 
+    encoding:
       charset: UTF-8
       enabled: true
       force: true
-      
+
 spring:
   mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+
+
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/blog?serverTimezone=Asia/Seoul&useSSL=false&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useSSL=false&characterEncoding=utf-8
     username: blog
     password: gusdn1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update # 없으면 만들고 있으면 그대로 사용
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity 필드명 그대로 테이블을 생성한다.
+      ddl-auto: create # 없으면 만들고 있으면 그대로 사용
+      use-new-id-generator-mappings: false  # JPA의 기본 전략을 따르지 않겠다.
     show-sql: true # mysql debug mode, 실제 쿼리가 로그로 보임
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+    properties:
+      hibernate.format_sql: true
 
   devtools:
     livereload:
@@ -33,4 +41,3 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
-      
