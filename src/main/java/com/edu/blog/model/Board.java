@@ -15,8 +15,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -57,10 +55,10 @@ public class Board {
 	private User user;
 
 
-
 	// ** ORM **
 	// 다중 값을 필드에 넣을 수 없기 때문에 데이터베이스에 추가하지 않는다.
-	// 외래키가 아니고 Reply에 있는 Board가 외래키이다. 
+	// ** mappedBy
+	// 외래키를 생성하지 않고 Reply 에 있는 Board 가 외래키이다.
 	// 조인을 통해 값을 얻기 위한 변수이다.
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"board"})
