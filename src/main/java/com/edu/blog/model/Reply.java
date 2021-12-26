@@ -49,10 +49,10 @@ public class Reply {
 	private User user;
 
 
-
 	@CreationTimestamp
 	private Timestamp createDate;
-	
+
+
 	public void updateReply(String content, User user, Board board) {
 		setContent(content);
 		setUser(user);

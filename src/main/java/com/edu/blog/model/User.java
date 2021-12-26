@@ -38,7 +38,7 @@ public class User {
 	@Id
 	// 애플리케이션에 연결된 데이터베이스의 전략(auto_increment)을 따라간다.
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idx;
 
 	@Column(nullable = false, length = 100, unique = true)
 	private String username; 
