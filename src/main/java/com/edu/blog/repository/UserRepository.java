@@ -8,12 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.edu.blog.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
-	
-//	JpaRepository에 기본적인 CRUD 기능이 정의되어있다. 
-//	Data Access Object와 동일한 기능을 한다. 
-//	자동으로 Bean 등록이 된다. 
-//	@Repository 생략 가능하다.
-
 
 	Optional<User> findByUsername(String username);
 	

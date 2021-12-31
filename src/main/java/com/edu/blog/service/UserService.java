@@ -44,10 +44,9 @@ public class UserService {
 
 	@Transactional
 	public void 회원수정(User user) {
-		
 
 		// 영속성 컨텍스트의 User를 영속화시키고, 영속화된 User를 수정한다. 	
-		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
+		User persistance = userRepository.findById(user.getIdx()).orElseThrow(()->{
 			return new IllegalArgumentException("회원 찾기 실패");
 			}
 		);
