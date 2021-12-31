@@ -48,8 +48,6 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private RoleType role; 
 
-	private String oauth;
-
 	// 현재 시간 자동 입력해준다.
 	@CreationTimestamp
 	private Timestamp createdDate;

@@ -1,7 +1,6 @@
 package com.edu.blog.test;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HttpControllerTest {
+
+
     // 웹 브라우저에서만 GET 요청이 가능하다.
     // GET 방식은 query request 방식으로만 데이터 전송이 가능하다.
     @GetMapping("/get/test")

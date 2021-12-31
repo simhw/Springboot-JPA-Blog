@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BlogContollerTest {
+
     @GetMapping("/test/hello")
     public String returnHello(){
-        String html = "<h1>Hello World</h1>";
-        return html;
+
+        return "<h1>Hello World</h1>";
     }
+
 }

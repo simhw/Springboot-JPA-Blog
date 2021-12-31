@@ -19,7 +19,8 @@
 6. @DynamicInsert
 - 데이터 삽입 시 null 인 필드를 제외시켜준다.
 - Default 값 삽입 시 null 값이 들어가는 경우를 막아준다.
-- ex, insert into user values ("id", "password", "email", null);
+- ex. insert into User values("id", "password", "email", null);
+
 
 =================================================================================
 ** 연관관계
