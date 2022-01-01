@@ -10,3 +10,12 @@
 - get() 은 null 일 경우 NoSuchElementException 이 발생한다.
 - orElseThrow() 은 null 일 경우 예외를 던져준다.
 - orElse(), orElseGet 은 null 일 경우 값을 지정해 반환해준다.
+
+2. Save 함수
+- save 함수는 Entity 의 @id 값에 대한 데이터가 있으면(merge() 호출) (1)update 를 한다.
+- Entity 의 @id 값에 대한 데이터가 없을 시(persist() 호출) (2)insert 를 한다.
+- update 시 @Transactional 을 사용해준다.
+
+** Entity 가 영속성 컨텍스트 1차 캐시에 있는지 확인 후 없다면 DB에 select 쿼리를 날려서 조회합니다.
+DB 에서 조회가 되어 1차 캐시에 엔티티가 저장이 되면 트랜잭션 커밋 시점에 파라미터 Entity 의 값과 1차 캐시에 저장되어 있는 Entity 의 값을 비교하여
+다른 점이 있을 경우 update 쿼리가 발생합니다. 반대로, DB에 해당 값이 없을 때 insert 쿼리가 발생합니다.

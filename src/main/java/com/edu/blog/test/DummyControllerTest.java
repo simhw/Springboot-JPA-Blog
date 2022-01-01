@@ -9,10 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import com.edu.blog.model.RoleType;
 import com.edu.blog.model.User;
@@ -61,11 +59,29 @@ public class DummyControllerTest {
 	}
 
 	@GetMapping("/dummy/user")
-	public  List<User> selectPage(@PageableDefault(size = 2, sort = "idx", direction  = Sort.Direction.ASC) Pageable pageable) {
+	public List<User> selectPage(@PageableDefault(size = 2, sort = "idx", direction  = Sort.Direction.ASC) Pageable pageable) {
 
 		Page<User> userPage = userRepository.findAll(pageable);
 		List<User> users = userPage.getContent();
 
 		return users;
+	}
+
+    @Transactional
+	@PutMapping("/dummy/user/{idx}")
+	public void updateUser(@PathVariable int idx, @RequestBody User req) {
+
+		// 1. 기존 User 객체를 찾는다.
+		User preUser =  userRepository.findById(idx).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+
+		// 2. 기존 User 객체의 값을 변경해준다.
+		preUser.setEmail(req.getEmail());
+		preUser.setPassword(req.getPassword());
+
+		// user 객체의 idx 값을 전달해준다.
+		// userRepository.save(preUser);
+
+
+
 	}
 }
