@@ -71,7 +71,7 @@ public class DummyControllerTest {
 	@PutMapping("/dummy/user/{idx}")
 	public void updateUser(@PathVariable int idx, @RequestBody User req) {
 
-		// 1. 기존 User 객체를 찾는다.
+		// 1. 기존 User 객체를 찾는다. (Persistence)
 		User preUser =  userRepository.findById(idx).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
 		// 2. 기존 User 객체의 값을 변경해준다.
@@ -81,7 +81,6 @@ public class DummyControllerTest {
 		// user 객체의 idx 값을 전달해준다.
 		// userRepository.save(preUser);
 
-
-
+		// Dirty Checking 
 	}
 }

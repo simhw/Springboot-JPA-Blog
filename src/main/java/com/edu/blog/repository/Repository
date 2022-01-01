@@ -15,6 +15,9 @@
 - save 함수는 Entity 의 @id 값에 대한 데이터가 있으면(merge() 호출) (1)update 를 한다.
 - Entity 의 @id 값에 대한 데이터가 없을 시(persist() 호출) (2)insert 를 한다.
 - update 시 @Transactional 을 사용해준다.
+- @Transactional 사용 시 Transactional 이 끝나는 시점에 변화가 있는 모든 엔티티 객체를 데이터베이스에 자동으로 반영해준다.
+
+
 
 ** Entity 가 영속성 컨텍스트 1차 캐시에 있는지 확인 후 없다면 DB에 select 쿼리를 날려서 조회합니다.
 DB 에서 조회가 되어 1차 캐시에 엔티티가 저장이 되면 트랜잭션 커밋 시점에 파라미터 Entity 의 값과 1차 캐시에 저장되어 있는 Entity 의 값을 비교하여
