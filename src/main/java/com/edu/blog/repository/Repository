@@ -1,6 +1,12 @@
-** JPA Repository Class Annotataion
+** JPA Repository 란?
 
-//	JpaRepository에 기본적인 CRUD 기능이 정의되어있다.
-//	Data Access Object와 동일한 기능을 한다.
-//	자동으로 Bean 등록이 된다.
-//	@Repository 생략 가능하다.
+- JpaRepository 에는 기본적인 CRUD 기능이 정의되어있다.
+- Data Access Object와 동일한 기능을 한다.
+- 자동으로 Bean 등록이 된다.
+- @Repository 생략 가능하다.
+
+
+1. Optional 타입으로 반환받을 수 있다.
+- get() 은 null 일 경우 NoSuchElementException 이 발생한다.
+- orElseThrow() 은 null 일 경우 예외를 던져준다.
+- orElse(), orElseGet 은 null 일 경우 값을 지정해 반환해준다.
