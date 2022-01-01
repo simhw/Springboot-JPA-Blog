@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,25 +38,34 @@ public class DummyControllerTest {
 	public User selectUser(@PathVariable int idx) {
 
 
-//		User user = userRepository.findById(idx).orElseThrow(new Supplier<IllegalArgumentException>() {
-//
-//			@Override
-//			public IllegalArgumentException get() {
-//				return new IllegalArgumentException("해당 회원이 존재하지 않습니다.");
-//			}
-//
-//		});
+		User user = userRepository.findById(idx).orElseThrow(new Supplier<IllegalArgumentException>() {
 
-		User user =  userRepository.findById(idx).orElseThrow(() -> {
-			return new IllegalArgumentException("해당 회원이 존재하지 않습니다.");
+			@Override
+			public IllegalArgumentException get() {
+				return new IllegalArgumentException("해당 회원이 존재하지 않습니다.");
+			}
+
 		});
+
+//		User user =  userRepository.findById(idx).orElseThrow(() -> {
+//			return new IllegalArgumentException("해당 회원이 존재하지 않습니다.");
+//		});
 
 		return user;
 	}
 
-	@GetMapping("/dummy/user")
+	@GetMapping("/dummy/users")
 	public List<User> selectAllUser() {
-		return userRepository.findAll();
 
+		return userRepository.findAll();
+	}
+
+	@GetMapping("/dummy/user")
+	public  List<User> selectPage(@PageableDefault(size = 2, sort = "idx", direction  = Sort.Direction.ASC) Pageable pageable) {
+
+		Page<User> userPage = userRepository.findAll(pageable);
+		List<User> users = userPage.getContent();
+
+		return users;
 	}
 }
