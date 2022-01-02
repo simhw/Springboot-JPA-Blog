@@ -22,10 +22,11 @@ public class DummyControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 
-	@PostMapping("/dummy/user/insert")
-	public String InsertUser(User user) {
+	@PostMapping("/dummy/user")
+	public String insertUser(User user) {
 
 		System.out.println("회원가입 Post 요청!!!");
+
 		user.setRole(RoleType.USER);
 		userRepository.save(user);
 
@@ -35,6 +36,7 @@ public class DummyControllerTest {
 	@GetMapping("/dummy/user/{idx}")
 	public User selectUser(@PathVariable int idx) {
 
+		System.out.println("회원찾기 Get 요청!!!");
 
 		User user = userRepository.findById(idx).orElseThrow(new Supplier<IllegalArgumentException>() {
 
@@ -69,7 +71,9 @@ public class DummyControllerTest {
 
     @Transactional
 	@PutMapping("/dummy/user/{idx}")
-	public void updateUser(@PathVariable int idx, @RequestBody User req) {
+	public String updateUser(@PathVariable int idx, @RequestBody User req) {
+
+		System.out.println("회원변경 Put 요청!!!");
 
 		// 1. 기존 User 객체를 찾는다. (Persistence)
 		User preUser =  userRepository.findById(idx).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
@@ -82,16 +86,23 @@ public class DummyControllerTest {
 		// userRepository.save(preUser);
 
 		// (1) Dirty Checking (2) Transactional 종료
+
+		return "회원이 수정되었습니다.";
 	}
 
 	@DeleteMapping("/dummy/user/{idx}")
-	public void deleteUser(@PathVariable int idx) {
+	public String deleteUser(@PathVariable int idx) {
+
+		System.out.println("회원삭제 Delete 요청!!!");
+
 		try {
 			userRepository.deleteById(idx);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return "회원이 삭제되었습니다.";
 
 	}                  
 }

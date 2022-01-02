@@ -2,5 +2,7 @@
 <!DOCTYPE html>
 
 <div class="jumbotron text-center" style="margin-bottom: 0">
-	<p>@Created by SHIM</p>
+	<p>@Created 심현우😇</p>
+	<p>Spring Boot Sample Project</p>
+
 </div>
