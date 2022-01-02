@@ -1,0 +1,17 @@
+package com.edu.blog.handler;
+
+
+import org.hibernate.exception.DataException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+
+@ControllerAdvice
+@RestController
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public String handleArgumentException(IllegalArgumentException ex) {
+        return ex.getMessage();
+    }
+}

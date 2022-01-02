@@ -22,8 +22,8 @@ public class DummyControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 
-	@PostMapping("/dummy/join")
-	public String join(User user) {
+	@PostMapping("/dummy/user/insert")
+	public String InsertUser(User user) {
 
 		System.out.println("회원가입 Post 요청!!!");
 		user.setRole(RoleType.USER);
@@ -81,6 +81,17 @@ public class DummyControllerTest {
 		// user 객체의 idx 값을 전달해준다.
 		// userRepository.save(preUser);
 
-		// Dirty Checking 
+		// (1) Dirty Checking (2) Transactional 종료
 	}
+
+	@DeleteMapping("/dummy/user/{idx}")
+	public void deleteUser(@PathVariable int idx) {
+		try {
+			userRepository.deleteById(idx);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}                  
 }
