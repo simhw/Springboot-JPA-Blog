@@ -10,14 +10,14 @@ public class UserController {
     @GetMapping("/user/joinForm")
     public String joinForm() {
 
-        // /WEB-INF/views/user/joinForm.jsp
+        // /WEB-INF/views/blog/user/joinForm.jsp
         return "user/joinForm";
     }
 
     @GetMapping("/user/loginForm")
     public String loginForm() {
 
-        // /WEB-INF/views/user/loginForm.jsp
+        // /WEB-INF/views/blog/user/loginForm.jsp
         return "user/loginForm";
     }
 }
