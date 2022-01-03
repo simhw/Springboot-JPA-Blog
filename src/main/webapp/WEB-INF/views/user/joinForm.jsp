@@ -24,5 +24,8 @@
 </div>
 <br>
 
-<script src="/javascript/user.js"></script>
+<script src="/blog/javascript/user.js"></script>
+
+<!-- /views/user/user.jsp -->
+
 <%@ include file="../layout/footer.jsp" %>
