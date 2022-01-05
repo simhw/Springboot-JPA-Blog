@@ -33,11 +33,13 @@ let index = {
 			// 응답 성공
 		}).done(function(res){
 			alert("회원가입이 완료되었습니다.");
-			location.href= "/blog";
+			// location.href= "/blog";
+			return res;
 			// 응답 실패
 		}).fail(function(err){
 			console.log(err);
 			alert("회원가입이 실패하였습니다.");
+			return err;
 		});
 	},
 	
