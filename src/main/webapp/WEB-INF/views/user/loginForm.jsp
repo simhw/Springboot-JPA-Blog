@@ -27,5 +27,5 @@ REDIRECT_URI = http://localhost:8080/auth/kakao/callback
 </div>
 <br>
 
-<script src="/blog/javascript/user.js"></script>
+<script src="/javascript/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>x
