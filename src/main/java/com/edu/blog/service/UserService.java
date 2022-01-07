@@ -1,6 +1,5 @@
 package com.edu.blog.service;
 
-import com.edu.blog.model.RoleType;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +15,11 @@ public class UserService {
     @Transactional
     public void 회원가입(User user) {
         userRepository.save(user);
+    }
+
+    // Service 종료 시에도 데이터의 정합성이 유지된다.
+    @Transactional(readOnly = true)
+    public User 로그인(User user) {
+        return userRepository.findByIdAndPassword(user.getId(), user.getPassword());
     }
 }

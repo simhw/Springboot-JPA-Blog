@@ -1,9 +1,13 @@
 let index = {
 	
 	init:function(){
-		
+
+
 		$('#btn-save').on("click", ()=>{
 			this.save();
+		});
+		$('#btn-login').on("click", ()=>{
+			this.login();
 		});
 		$('#btn-update').on("click", ()=>{	
 			this.update();
@@ -25,7 +29,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/blog/api/user/join",
 			data: JSON.stringify(data),		// http body data
 			contentType: "application/json; charset=utf-8",	// http body data type
 			dataType: "json"	// 서버로부터 JSON 타입으로 응답이 왔을 경우 javascript 형식으로 반환
@@ -33,9 +37,36 @@ let index = {
 			// 응답 성공
 		}).done(function(res){
 			alert("회원가입이 완료되었습니다.");
-			// location.href= "/blog";
+			location.href= "/blog";
 			return res;
 			// 응답 실패
+		}).fail(function(err){
+			console.log(err);
+			alert("회원가입이 실패하였습니다.");
+			return err;
+		});
+	},
+
+	// 로그인
+	login: function(){
+
+		let data = {
+			id:$('#id').val(),
+			password:$('#password').val(),
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/blog/api/user/login",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+
+		}).done(function(res){
+			alert("로그인이 완료되었습니다.");
+			location.href= "/blog";
+			return res;
+
 		}).fail(function(err){
 			console.log(err);
 			alert("회원가입이 실패하였습니다.");
