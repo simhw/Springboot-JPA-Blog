@@ -29,7 +29,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
-			url: "/api/user/join",
+			url: "/auth/api/user/join",
 			data: JSON.stringify(data),		// http body data
 			contentType: "application/json; charset=utf-8",	// http body data type
 			dataType: "json"	// 서버로부터 JSON 타입으로 응답이 왔을 경우 javascript 형식으로 반환

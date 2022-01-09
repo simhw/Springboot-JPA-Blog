@@ -24,7 +24,7 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/api/user/join")
+    @PostMapping("/auth/api/user/join")
     public ResponseDto<String> join(@RequestBody User user) {
 
         user.setRole(RoleType.USER);
@@ -33,10 +33,16 @@ public class UserApiController {
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
 
+    @PostMapping("/auth/api/user/login")
+    public ResponseDto<String> login(@RequestBody User user) {
+        return null;
+    }
+
+
     @PostMapping("/api/user/login")
-    public ResponseDto<String> login(@RequestBody User user, HttpSession session) {
+    public ResponseDto<String> login2(@RequestBody User user, HttpSession session) {
         // ResponseEntity 추가 구현 예정
-        User principal = userService.로그인(user);
+        User principal = userService.로그인2(user);
         if (principal != null) {
             session.setAttribute("principal", principal);
         }

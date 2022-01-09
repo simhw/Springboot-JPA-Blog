@@ -11,8 +11,7 @@ REDIRECT_URI = http://localhost:8080/auth/kakao/callback
  -->
 
 <div class="container">
-	<!--form action="/auth/login" method="post"-->
-	<form>
+	<form action="/auth/api/user/login" method="post">
 		<div class="form-group">
 			<label for="id">아이디</label>
 			<input type="text" class="form-control" id="id" name="id" placeholder="ID">
@@ -21,11 +20,11 @@ REDIRECT_URI = http://localhost:8080/auth/kakao/callback
 			<label for="password">비밀번호</label>
 			<input type="password" class="form-control" id="password" name="password" placeholder="PASSWORD">
 		</div>
+		<button id="btn-login" class="btn btn-primary">로그인</button>
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=784bf132b14053e60a1032b39c3818d2&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code"> <img height="38px" src="/image/kakao_login_button.png"></a>
 	</form>
-	<button id="btn-login" class="btn btn-primary">로그인</button>
 </div>
 <br>
 
-<script src="/javascript/user.js"></script>
+<!--script src="/javascript/user.js"/-->
 <%@ include file="../layout/footer.jsp"%>x
