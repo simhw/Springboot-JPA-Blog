@@ -41,8 +41,7 @@ let index = {
 			return res;
 			// 응답 실패
 		}).fail(function(err){
-			console.log(err);
-			alert("회원가입이 실패하였습니다.");
+			alert(JSON.stringify(err));
 			return err;
 		});
 	},

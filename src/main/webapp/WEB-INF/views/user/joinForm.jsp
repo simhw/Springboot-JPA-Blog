@@ -24,7 +24,7 @@
 </div>
 <br>
 
-<script src="/blog/javascript/user.js"></script>
+<script src="/javascript/user.js"></script>
 
 <!-- /views/user/user.jsp -->
 
