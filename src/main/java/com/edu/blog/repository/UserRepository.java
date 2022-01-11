@@ -12,7 +12,9 @@ import org.springframework.data.jpa.repository.Query;
 // User 형의 Primary key 는 Integer 형이다.
 public interface UserRepository extends JpaRepository<User, Integer>{
     // JPA Naming 빙식
-    // SELECT * FROM WHERE id=?(1) AND password=?(2)
+    Optional<User> findUserById(String id);
+
+    // JPA Naming 빙식
     User findByIdAndPassword(String id, String password);
 
     // NativeQuery 방식
