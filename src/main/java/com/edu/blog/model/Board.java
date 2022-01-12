@@ -46,14 +46,12 @@ public class Board {
 	// 조회수 (기본 값 정수형)
 	private int count;
 
-
 	// ** ORM **
 	// Board : User = N : 1 즉, 한 명의 사용자는 여러 개의 게시글을 작성할 수 있다.
 	// 데이터베이스는 객체를 저장할 수 없으므로 저장할 때 필드(FK) 값을 지정해준다.
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
-
 
 	// ** ORM **
 	// 다중 값을 필드에 넣을 수 없기 때문에 데이터베이스에 추가하지 않는다.
@@ -65,8 +63,6 @@ public class Board {
 	@OrderBy("id desc")
 	private List<Reply> replies;
 
-
 	@CreationTimestamp
 	private Timestamp createDate;
-	
 }

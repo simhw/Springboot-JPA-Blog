@@ -4,32 +4,25 @@ let index = {
 		$('#btn-save').on("click", () => {
 			this.save();
 		});
-
 		$('#btn-delete').on("click", () => {
 			this.deleteById();
 		});
 		$('#btn-update').on("click", () => {
 			this.update();
 		});
-		
 		$('#btn-reply-save').on("click", () => {
 			this.replySave();
 		});
-
 	},
 	// 게시글 작성 
 	save: function() {
-		// alert('user save 함수 호출');
-		// key:value
 
 		let data = {
 			title: $('#title').val(),
-			content: $('#content').val(),
+			content: $('#content').val()
 		}
 
-		// ajax 통신을 이용해 데이터를 jason으로 변경해 insert 해준다. 
 		$.ajax({
-			// 회원가입 수행 요청 
 			type: "POST",
 			url: "/api/board",
 			data: JSON.stringify(data),
@@ -40,11 +33,9 @@ let index = {
 			// 응답 실행 
 			alert("저장되었습니다.");
 			location.href = "/";
-
 		}).fail(function(error) {
 			// 응답 실패 
 			alert(JSON.stringify(error));
-
 		});
 	},
 	// 게시글 삭제 

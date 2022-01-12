@@ -2,6 +2,7 @@ package com.edu.blog.config.auth;
 
 import com.edu.blog.model.RoleType;
 import com.edu.blog.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 
 // implements 은 부모의 메소드를 반드시 오버라이딩(재정의)해야 한다.
 // UserDetails 타입
+@Getter
 public class PrincipalDetail implements UserDetails {
 
     // Composition
