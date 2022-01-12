@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PrincipalDetailService principalDetailService;
 
+    // BCryptPasswordEncoder 는 Spring Security 에서 제공하는 비밀번호 암호화 객체이다.
     @Bean
     public BCryptPasswordEncoder encodePassword() {
         return new BCryptPasswordEncoder();
@@ -40,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable() // csrf 토큰 비활성화
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/javascript/**")
+                .antMatchers("/", "/auth/**", "/javascript/**", "/image/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

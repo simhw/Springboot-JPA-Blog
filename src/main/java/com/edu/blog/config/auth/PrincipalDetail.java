@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 // implements 은 부모의 메소드를 반드시 오버라이딩(재정의)해야 한다.
-
-public class PrincipalDetail implements UserDetails{
+// UserDetails 타입
+public class PrincipalDetail implements UserDetails {
 
     // Composition
     private User user;

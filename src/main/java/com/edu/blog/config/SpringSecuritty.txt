@@ -1,3 +1,4 @@
 ** Spring Security
-Spring Security Filter 가 인증이 필요한 서비스 요청 시 요청을 가로챈다. ex) 로그인
-Spring Security 를 사용하기 위해선 UserDetails(인터페이스) 타입에 사용자의 정보를 저장해야한다.
+- Spring Security Filter 가 인증이 필요한 서비스 요청 시 요청을 가로챈다. ex) 로그인
+- Spring Security 를 사용하기 위해선 UserDetails(인터페이스) 타입에 사용자의 정보를 저장해야한다. Spring Security 가 요청을 완료하면
+UserDetails 타입의 객체를 Spring Security Session 에 저장한다.
