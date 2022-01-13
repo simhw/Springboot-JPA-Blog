@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -26,5 +26,11 @@ public class BoardService {
 
     public Page<Board> 글목록(Pageable pageable) {
         return boardRepository.findAll(pageable);
+    }
+
+    public Board 글상세보기(int id) {
+        return boardRepository.findById(id).orElseThrow(()->{
+            return new IllegalArgumentException("삭재된 게시글입니다.");
+        });
     }
 }
