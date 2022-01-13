@@ -41,13 +41,14 @@ let index = {
 	// 게시글 삭제 
 	deleteById: function() {
 		
-		let id = $('#id').val();
-		
+		let id = $('#id').text();
+
 		$.ajax({
 			// 삭제 수행 요청 
 			type: "DELETE",
 			url: "/api/board/" + id,
-			dataType: "json"
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
 
 		}).done(function(resp) {
 			// 응답 실행 

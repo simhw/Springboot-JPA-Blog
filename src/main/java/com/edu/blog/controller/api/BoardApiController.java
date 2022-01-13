@@ -7,9 +7,7 @@ import com.edu.blog.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BoardApiController {
@@ -18,9 +16,15 @@ public class BoardApiController {
     BoardService boardService;
 
     @PostMapping("/api/board")
-    public ResponseDto<String> writeBoard(@RequestBody Board board,
-                                          @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<String> writeBoard(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
         boardService.글쓰기(board, principal.getUser());
+        return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
+    }
+
+    @DeleteMapping("/api/board/{id}")
+    public ResponseDto<String> deleteBoard(@PathVariable int id) {
+        System.out.println("start deleteBoard!!!");
+        boardService.글삭제(id);
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
 }
