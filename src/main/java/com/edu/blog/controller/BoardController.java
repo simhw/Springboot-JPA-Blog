@@ -3,6 +3,7 @@ package com.edu.blog.controller;
 
 import com.edu.blog.model.Board;
 import com.edu.blog.service.BoardService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -39,5 +40,12 @@ public class BoardController {
     public String writeForm() {
         // /WEB-INF/views/board/writeForm.jsp
         return "/board/writeForm";
+    }
+
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable int id, Model model) {
+        model.addAttribute("board", boardService.글상세보기(id));
+        // /WEB-INF/views/board//updateForm.jsp
+        return "/board/updateForm";
     }
 }

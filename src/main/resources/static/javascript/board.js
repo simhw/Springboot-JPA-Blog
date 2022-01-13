@@ -41,7 +41,7 @@ let index = {
 	// 게시글 삭제 
 	deleteById: function() {
 		
-		let id = $('#id').text();
+		let id = $('#id').val();
 
 		$.ajax({
 			// 삭제 수행 요청 
@@ -70,10 +70,9 @@ let index = {
 		let data = {
 			title: $('#title').val(),
 			content: $('#content').val(),
-		}
+		};
 		
 		$.ajax({
-			// 회원가입 수행 요청 
 			type: "PUT",
 			url: "/api/board/" + id,
 			data: JSON.stringify(data),

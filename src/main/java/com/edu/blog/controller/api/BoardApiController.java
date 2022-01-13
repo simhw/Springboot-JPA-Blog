@@ -27,4 +27,10 @@ public class BoardApiController {
         boardService.글삭제(id);
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
+
+    @PutMapping("/api/board/{id}")
+    public ResponseDto<String> updeteBoard(@PathVariable int id, @RequestBody Board board) {
+        boardService.글수정(id, board);
+        return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
+    }
 }

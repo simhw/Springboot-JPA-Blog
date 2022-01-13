@@ -40,4 +40,16 @@ public class BoardService {
     public void 글삭제(int id) {
         boardRepository.deleteById(id);
     }
+
+    @Transactional
+    public void 글수정(int id, Board req) {
+        // 영속화
+        Board board = boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("삭재된 게시글입니다.");
+        });
+        board.setTitle(req.getTitle());
+        board.setContent(req.getContent());
+        // 헤당 함수 종료 시(Service 종료) Transaction 이 종료된다.
+        // 이때 Dirty Checking 이 실행되고 자동으로 업데이트가 실행된다.
+    }
 }

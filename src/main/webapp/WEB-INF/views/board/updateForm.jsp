@@ -9,10 +9,10 @@
 	<form>
 	<input type="hidden" id="id" value="${board.id}"/>
 		<div class="form-group">
-			<input value='${board.title}' type="text" class="form-control" id="title" placeholder="Title">
+			<input id="title"  value='${board.title}' type="text" class="form-control" placeholder="Title">
 		</div>
 		<div class="form-group">
-			<textarea class="form-control summernote" rows="5" id="content">${board.content}</textarea>
+			<textarea id="content" class="form-control summernote" rows="5" >${board.content}</textarea>
 		</div>
 	</form>
 	<button id="btn-update" class="btn btn-primary">수정</button>
