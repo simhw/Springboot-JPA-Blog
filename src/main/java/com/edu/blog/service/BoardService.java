@@ -45,6 +45,7 @@ public class BoardService {
     public void 글수정(int id, Board req) {
         // 영속화
         Board board = boardRepository.findById(id).orElseThrow(() -> {
+            // Transaction 처리 (Rollback)
             return new IllegalArgumentException("삭재된 게시글입니다.");
         });
         board.setTitle(req.getTitle());
