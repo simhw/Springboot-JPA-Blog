@@ -9,14 +9,20 @@ public class UserController {
 
     @GetMapping("/auth/user/joinForm")
     public String joinForm() {
-        // /WEB-INF/views/blog/user/joinForm.jsp
+        // /WEB-INF/views/user/joinForm.jsp
         return "user/joinForm";
     }
 
     @GetMapping("/auth/user/loginForm")
     public String loginForm() {
-        // /WEB-INF/views/blog/user/loginForm.jsp
+        // /WEB-INF/views/user/loginForm.jsp
         return "user/loginForm";
+    }
+
+    @GetMapping("/user/updateForm")
+    public String updateForm() {
+        // /WEB-INF/views/user/updateForm.jsp
+        return "user/updateForm";
     }
 
 }

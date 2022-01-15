@@ -78,17 +78,15 @@ let index = {
 	update: function(){
 
 		let data = {
+			idx:$('#idx').val(),
 			id:$('#id').val(),
-			username:$('#username').val(),
 			password:$('#password').val(),
 			email:$('#email').val()
 		}
 
-		console.log(id + " " + password  + " " + email);
-		
 		$.ajax({
 			type: "PUT",
-			url: "/user",
+			url: "/api/user",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"

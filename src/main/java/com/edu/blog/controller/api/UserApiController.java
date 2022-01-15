@@ -9,10 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.nio.charset.Charset;
@@ -25,8 +22,13 @@ public class UserApiController {
 
     @PostMapping("/auth/api/user/join")
     public ResponseDto<String> join(@RequestBody User user) {
-        System.out.println("UserApiController join start!!!");
         userService.회원가입(user);
+        return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
+    }
+
+    @PutMapping("/api/user")
+    public ResponseDto<String> updateUser(@RequestBody User user) {
+        userService.회원수정(user);
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
 
@@ -44,4 +46,6 @@ public class UserApiController {
         }
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
+
+
 }
