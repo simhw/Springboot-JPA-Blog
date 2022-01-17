@@ -5,6 +5,7 @@ import com.edu.blog.config.auth.PrincipalDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PrincipalDetailService principalDetailService;
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     // BCryptPasswordEncoder 는 Spring Security 에서 제공하는 비밀번호 암호화 객체이다.
     @Bean
     public BCryptPasswordEncoder encodePassword() {
@@ -38,7 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable() // csrf 토큰 비활성화
                 .authorizeRequests()
                 .antMatchers("/", "/auth/**", "/javascript/**", "/image/**")

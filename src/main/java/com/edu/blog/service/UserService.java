@@ -4,6 +4,11 @@ import com.edu.blog.model.RoleType;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +19,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+//    bcrypt 해쉬 알고리즘
     @Autowired
     private BCryptPasswordEncoder encoder;
 
@@ -29,7 +35,7 @@ public class UserService {
     @Transactional
     public void 회원수정(User req) {
         // 영속화
-        User user = userRepository.findById(req.getIdx()).orElseThrow(() -> {
+        User user = userRepository.findUserById(req.getId()).orElseThrow(() -> {
             // Transaction 처리 (Rollback)
             return new IllegalArgumentException("존재하지 않은 회원입니다.");
         });
