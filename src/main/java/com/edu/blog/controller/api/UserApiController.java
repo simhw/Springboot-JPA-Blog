@@ -3,8 +3,11 @@ package com.edu.blog.controller.api;
 
 import com.edu.blog.config.auth.PrincipalDetail;
 import com.edu.blog.dto.ResponseDto;
+import com.edu.blog.model.KakaoToken;
 import com.edu.blog.model.User;
 import com.edu.blog.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -52,7 +55,7 @@ public class UserApiController {
 
     // 카카오 로그인
     @GetMapping("/auth/kakao/callback")
-    public ResponseEntity kakaoRedirect(String code) {
+    public ResponseEntity kakaoRedirect(String code) throws JsonProcessingException {
         // 1. 카카오에서 인증 코드 반환해준다.
 
         // 2. 카카오에 인증 토큰을 요청한다.
@@ -60,15 +63,24 @@ public class UserApiController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "authorization_code");
-        params.add("client_id", "784bf132b14053e60a1032b39c3818d2");
-        params.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
-        params.add("code", code);
+        MultiValueMap<String, String> tokenReqparams = new LinkedMultiValueMap<>();
+        tokenReqparams.add("grant_type", "authorization_code");
+        tokenReqparams.add("client_id", "784bf132b14053e60a1032b39c3818d2");
+        tokenReqparams.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+        tokenReqparams.add("code", code);
 
-        HttpEntity<MultiValueMap<String, String>> tokenRequest = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> tokenRequest = new HttpEntity<>(tokenReqparams, headers);
+        // 3. 카카오에서 토큰을 받는다.
         ResponseEntity<String> response = template.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, tokenRequest, String.class);
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        KakaoToken kakaoToken = objectMapper.readValue(response.getBody(), KakaoToken.class);
+
+        // 4. 토큰을 전송하여 카카오에 사용자 정보를 요청한다.
+        headers.add("Authorization", "Bearer " + kakaoToken.getAccess_token());
+        HttpEntity<MultiValueMap<String, String>> userInfoRequest = new HttpEntity<>(headers);
+
+        response = template.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, userInfoRequest, String.class);
         return response;
     }
 
