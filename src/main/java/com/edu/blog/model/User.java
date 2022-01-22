@@ -46,7 +46,10 @@ public class User {
 
 	// 데이터베이스에는 RoleType 이 존재하지 않기 때문에 String 타입을 명시해준다.
 	@Enumerated(EnumType.STRING)
-	private RoleType role; 
+	private RoleType role;
+
+	@Column(length = 10)
+	private String oAuth;
 
 	// 현재 시간 자동 입력해준다.
 	@CreationTimestamp

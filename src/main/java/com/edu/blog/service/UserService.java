@@ -19,9 +19,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    bcrypt 해쉬 알고리즘
+    //    bcrypt 해쉬 알고리즘
     @Autowired
     private BCryptPasswordEncoder encoder;
+
+    @Transactional
+    public User 회원찾기(User user) {
+        User joinedUser = userRepository.findUserById(user.getId()).orElseGet(() -> {
+            return new User();
+        });
+        return joinedUser;
+    }
 
     @Transactional
     public void 회원가입(User user) {
@@ -30,7 +38,7 @@ public class UserService {
         user.setPassword(encodedPassword);
         user.setRole(RoleType.USER);
         userRepository.save(user);
-    }
+}
 
     @Transactional
     public void 회원수정(User req) {
