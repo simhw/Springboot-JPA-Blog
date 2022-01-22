@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class UserController {
+    private static final String PASSWORD = "kakao";
 
     @Autowired
     private UserService userService;
@@ -78,16 +79,19 @@ public class UserController {
 
         response = template.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, userInfoRequest, String.class);
         KakaoUser kakaoUser = objectMapper.readValue(response.getBody(), KakaoUser.class);
-        User user = User.builder().id(kakaoUser.getId().toString()).password("kakao").email(kakaoUser.getKakao_account().getEmail()).oAuth("kakao").build();
+
+        String userId = kakaoUser.getId().toString();
+        String userEmail = kakaoUser.getKakao_account().getEmail();
+        User user = User.builder().id(userId).password(PASSWORD).email(userEmail).oauth("kakao").build();
 
         // 5. 기존 회원 확인 후 회원가입을 한다.
-        if (userService.회원찾기(user).getId() == null) {
+        User joinedUser = userService.회원찾기(user);
+        if (joinedUser.getId() == null) {
             userService.회원가입(user);
         }
-        else {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getId(), user.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
+        // 6. 로그인
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getId(), PASSWORD));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return "redirect:/";
     }

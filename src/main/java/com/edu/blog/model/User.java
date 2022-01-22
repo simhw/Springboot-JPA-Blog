@@ -49,7 +49,7 @@ public class User {
 	private RoleType role;
 
 	@Column(length = 10)
-	private String oAuth;
+	private String oauth;
 
 	// 현재 시간 자동 입력해준다.
 	@CreationTimestamp
