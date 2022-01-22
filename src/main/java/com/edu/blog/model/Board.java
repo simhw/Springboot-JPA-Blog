@@ -50,7 +50,7 @@ public class Board {
 	// Board : User = N : 1 즉, 한 명의 사용자는 여러 개의 게시글을 작성할 수 있다.
 	// 데이터베이스는 객체를 저장할 수 없으므로 저장할 때 필드(FK) 값을 지정해준다.
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_idx")
 	private User user;
 
 	// ** ORM **

@@ -41,7 +41,7 @@ public class Reply {
 	// ** ORM **
 	// Reply : User = N : 1
 	@ManyToOne 
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_idx")
 	private User user;
 
 	@CreationTimestamp
