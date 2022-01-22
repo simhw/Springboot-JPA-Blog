@@ -25,7 +25,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity 필드명 그대로 테이블을 생성한다.
-      ddl-auto: create
+      ddl-auto: update
       use-new-id-generator-mappings: false  # JPA의 기본 전략을 따르지 않겠다.
 #    show-sql: true # mysql debug mode, 실제 쿼리가 로그로 보임
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

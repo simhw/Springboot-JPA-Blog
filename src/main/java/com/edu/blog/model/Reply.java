@@ -25,15 +25,12 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Reply {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 
 	@Column(nullable = false, length = 200)
 	private String content;
-
 
 	// ** ORM **
 	// Reply : Board = N : 1
@@ -41,17 +38,14 @@ public class Reply {
 	@JoinColumn(name = "board_id")
 	private Board board;
 
-
 	// ** ORM **
 	// Reply : User = N : 1
 	@ManyToOne 
 	@JoinColumn(name = "user_id")
 	private User user;
 
-
 	@CreationTimestamp
 	private Timestamp createDate;
-
 
 	public void updateReply(String content, User user, Board board) {
 		setContent(content);
