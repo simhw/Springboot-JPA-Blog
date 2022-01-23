@@ -1,6 +1,7 @@
 package com.edu.blog.controller.api;
 
 import com.edu.blog.config.auth.PrincipalDetail;
+import com.edu.blog.dto.ReplyDto;
 import com.edu.blog.dto.ResponseDto;
 import com.edu.blog.model.Board;
 import com.edu.blog.model.Reply;
@@ -36,9 +37,8 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<String> writeReply(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
-        System.out.println(reply.getContent());
-        boardService.댓글쓰기(boardId, principal.getUser(), reply.getContent());
+    public ResponseDto<String> writeReply(@RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
+        boardService.댓글쓰기(replyDto, principal.getUser());
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
 }

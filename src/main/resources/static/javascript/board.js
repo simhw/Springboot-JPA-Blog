@@ -93,22 +93,20 @@ let index = {
 	
 	// 댓글 작성  
 	replySave: function() {
-		let boardId = $('#board-id').val();
 		let data = {
-			content: $('#reply-content').val()
+			boardId: $('#board-id').val(),
+			content: $('#reply-content').val(),
 		};
-
-
 		$.ajax({
 			type: "POST",
-			url: `/api/board/${boardId}/reply`,
+			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 
 		}).done(function(resp) {
 			// 응답 실행
-			location.href = `/board/${boardId}`;
+			location.href = `/board/${data.boardId}`;
 
 		}).fail(function(error) {
 			// 응답 실패

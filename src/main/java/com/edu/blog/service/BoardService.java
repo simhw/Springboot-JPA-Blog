@@ -1,5 +1,6 @@
 package com.edu.blog.service;
 
+import com.edu.blog.dto.ReplyDto;
 import com.edu.blog.model.Board;
 import com.edu.blog.model.Reply;
 import com.edu.blog.model.User;
@@ -59,14 +60,15 @@ public class BoardService {
         // 이때 Dirty Checking 이 실행되고 자동으로 업데이트가 실행된다.
     }
 
-    public void 댓글쓰기(int boardId, User user, String content) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+    public void 댓글쓰기(ReplyDto replyDto, User user) {
+        Board board = boardRepository.findById(replyDto.getBoardId()).orElseThrow(() -> {
             return new IllegalArgumentException("삭재된 게시글입니다.");
         });
+
         Reply reply = new Reply();
         reply.setBoard(board);
         reply.setUser(user);
-        reply.setContent(content);
+        reply.setContent(replyDto.getContent());
 
         replyRepository.save(reply);
     }
