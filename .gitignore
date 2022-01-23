@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### 추가 ###
-../.DS_Store
+.DS_Store
