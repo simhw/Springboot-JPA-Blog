@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.edu.blog.dto.ReplyDto;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -47,9 +48,9 @@ public class Reply {
 	@CreationTimestamp
 	private Timestamp createDate;
 
-	public void updateReply(String content, User user, Board board) {
+	public void updateReply(Board board, String content, User user) {
+		setBoard(board);
 		setContent(content);
 		setUser(user);
-		setBoard(board);
 	}
 }

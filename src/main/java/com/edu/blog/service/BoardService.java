@@ -66,9 +66,7 @@ public class BoardService {
         });
 
         Reply reply = new Reply();
-        reply.setBoard(board);
-        reply.setUser(user);
-        reply.setContent(replyDto.getContent());
+        reply.updateReply(board, replyDto.getContent(), user);
 
         replyRepository.save(reply);
     }
