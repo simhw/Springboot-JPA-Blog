@@ -93,31 +93,26 @@ let index = {
 	
 	// 댓글 작성  
 	replySave: function() {
-		
+		let boardId = $('#board-id').val();
 		let data = {
-			userId: $('#userId').val(),
-			boardId: $('#boardId').val(),
 			content: $('#reply-content').val()
-		}
-		
-		console.log(data.userId, data.boardId, data.replyContent);
-		
+		};
+
+
 		$.ajax({
 			type: "POST",
-			url: `/api/board/${data.boardId}/reply`,
+			url: `/api/board/${boardId}/reply`,
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 
 		}).done(function(resp) {
-			// 응답 실행 
-			alert("저장되었습니다.");
-			location.href = `/board/${data.boardId}`;
+			// 응답 실행
+			location.href = `/board/${boardId}`;
 
 		}).fail(function(error) {
-			// 응답 실패 
+			// 응답 실패
 			alert(JSON.stringify(error));
-
 		});
 	}
 }

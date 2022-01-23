@@ -1,8 +1,10 @@
 package com.edu.blog.service;
 
 import com.edu.blog.model.Board;
+import com.edu.blog.model.Reply;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.BoardRepository;
+import com.edu.blog.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,9 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Transactional
     public void 글쓰기 (Board board, User user) {
@@ -52,5 +57,17 @@ public class BoardService {
         board.setContent(req.getContent());
         // 헤당 함수 종료 시(Service 종료) Transaction 이 종료된다.
         // 이때 Dirty Checking 이 실행되고 자동으로 업데이트가 실행된다.
+    }
+
+    public void 댓글쓰기(int boardId, User user, String content) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+            return new IllegalArgumentException("삭재된 게시글입니다.");
+        });
+        Reply reply = new Reply();
+        reply.setBoard(board);
+        reply.setUser(user);
+        reply.setContent(content);
+
+        replyRepository.save(reply);
     }
 }

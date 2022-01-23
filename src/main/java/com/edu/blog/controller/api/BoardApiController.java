@@ -3,6 +3,7 @@ package com.edu.blog.controller.api;
 import com.edu.blog.config.auth.PrincipalDetail;
 import com.edu.blog.dto.ResponseDto;
 import com.edu.blog.model.Board;
+import com.edu.blog.model.Reply;
 import com.edu.blog.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,13 @@ public class BoardApiController {
     @PutMapping("/api/board/{id}")
     public ResponseDto<String> updeteBoard(@PathVariable int id, @RequestBody Board board) {
         boardService.글수정(id, board);
+        return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
+    }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<String> writeReply(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+        System.out.println(reply.getContent());
+        boardService.댓글쓰기(boardId, principal.getUser(), reply.getContent());
         return new ResponseDto<String>(HttpStatus.OK.value(), "성공!!!");
     }
 }
