@@ -6,6 +6,8 @@ import com.edu.blog.model.Reply;
 import com.edu.blog.model.User;
 import com.edu.blog.repository.BoardRepository;
 import com.edu.blog.repository.ReplyRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 
-    @Autowired
-    private BoardRepository boardRepository;
-
-    @Autowired
-    private ReplyRepository replyRepository;
+    private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
 
     @Transactional
     public void 글쓰기 (Board board, User user) {
