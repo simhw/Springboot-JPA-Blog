@@ -23,8 +23,6 @@ let index = {
 			email:$('#email').val()
 		}
 
-		console.log(data);
-
 		// ajax 통신 + json 형 변환
 		$.ajax({
 			// 회원가입 수행 요청
@@ -36,9 +34,17 @@ let index = {
 
 			// 응답 성공
 		}).done(function(res){
-			alert("회원가입이 완료되었습니다.");
-			location.href= "/";
-			return res;
+			if (res.err_cd == 200) {
+				alert("회원가입이 완료되었습니다.");
+				location.href= "/";
+				return res;
+			}
+			else{
+				alert("사용할 수 없는 아이디입니다.");
+				location.href= "/auth/user/joinForm";
+				return res;
+			}
+
 			// 응답 실패
 		}).fail(function(err){
 			alert(JSON.stringify(err));
