@@ -1,5 +1,8 @@
 # Springboot-JPA-Blog
-Json 데이터 통신 
+스프링부트 블로그 프로젝트 
+
+JSON 데이터 통신이란? 
+
 1. Get 요청
 -주소에 데이터를 담아 보낸다. 
 http://localhost:8080/blog/user?username=sim
