@@ -110,6 +110,23 @@ let index = {
 			// 응답 실패
 			alert(JSON.stringify(error));
 		});
+	},
+
+	// 댓글 삭제
+	replyDelete: function (boardId, replyId) {
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`,
+			dataType: "json"
+
+		}).done(function(resp) {
+			// 응답 실행
+			alert("댓글이 삭제되었습니다.")
+			location.href = `/board/${boardId}`;
+		}).fail(function(error) {
+			// 응답 실패
+			alert(JSON.stringify(error));
+		});
 	}
 }
 

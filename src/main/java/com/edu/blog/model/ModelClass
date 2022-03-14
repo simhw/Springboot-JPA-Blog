@@ -42,6 +42,8 @@ private List<Reply> replies;
 reply_id(FK) 가 있을 경우 다중 값을 필드에 넣을 수 없기 때문에 데이터베이스에 추가하지 않는다.
 ex. reply_id(FK) : [1, 4, 6]
 
+
+
 Reply
 -------------------------------------------------------------------
  idx | content | user_id(FK) | board_id(FK) | created_date

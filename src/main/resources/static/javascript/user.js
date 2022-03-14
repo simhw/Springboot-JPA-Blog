@@ -4,7 +4,7 @@ let index = {
 
 
 		$('#btn-save').on("click", ()=>{
-			this.save();
+			this.join();
 		});
 		$('#btn-login').on("click", ()=>{
 			this.login();
@@ -15,7 +15,7 @@ let index = {
 	},
 
 	// 회원가입
-	save: function(){
+	join: function(){
 
 		let data = {
 			id:$('#id').val(),
@@ -39,12 +39,11 @@ let index = {
 				location.href= "/";
 				return res;
 			}
-			else{
+			else if (res.err_cd == 500){
 				alert("사용할 수 없는 아이디입니다.");
 				location.href= "/auth/user/joinForm";
 				return res;
 			}
-
 			// 응답 실패
 		}).fail(function(err){
 			alert(JSON.stringify(err));
@@ -74,7 +73,7 @@ let index = {
 
 		}).fail(function(err){
 			console.log(err);
-			alert("회원가입이 실패하였습니다.");
+			alert("로그인이 실패하였습니다.");
 			return err;
 		});
 	},

@@ -62,12 +62,16 @@ public class BoardService {
 
     public void 댓글쓰기(ReplyDto replyDto, User user) {
         Board board = boardRepository.findById(replyDto.getBoardId()).orElseThrow(() -> {
-            return new IllegalArgumentException("삭재된 게시글입니다.");
+            return new IllegalArgumentException("삭제된 게시글입니다.");
         });
 
         Reply reply = new Reply();
         reply.updateReply(board, replyDto.getContent(), user);
 
         replyRepository.save(reply);
+    }
+
+    public void 댓글삭제(int replyId) {
+        replyRepository.deleteById(replyId);
     }
 }
