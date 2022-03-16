@@ -50,6 +50,12 @@ public class UserController {
         return "user/updateForm";
     }
 
+    @GetMapping("/user/chatForm")
+    public String chatForm() {
+        // /WEB-INF/views/user/updateForm.jsp
+        return "user/chatForm";
+    }
+
     // 카카오 로그인 및 회원가입
     @GetMapping("/auth/kakao/callback")
     public String kakaoRedirect(String code) throws JsonProcessingException {
