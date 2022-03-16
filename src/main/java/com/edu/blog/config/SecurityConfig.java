@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // csrf 토큰 비활성화
                 .authorizeRequests()
-                .antMatchers("/", "/auth/**", "/javascript/**", "/image/**", "/css/**")
+                .antMatchers("/", "/auth/**", "/javascript/**", "/image/**", "/css/**", "/chat/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
