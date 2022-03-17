@@ -22,10 +22,27 @@ function addChatContent() {
     let chatContent = document.querySelector('#chat-content');
     let inputTxt = document.querySelector('#chat-outgoing-txt');
     let chatOutgoingContent = document.createElement('div');
+    chatOutgoingContent.className = "media media-chat media-chat-reverse";
+
     let date = new Date();
     let time = date.getHours() + ":" + date.getMinutes();
 
-    chatOutgoingContent.className = "media media-chat media-chat-reverse";
+    // 메세지 전송 및 저장
+    let chat = {
+        sender: "sim",
+        receiver: "kim",
+        msg: inputTxt.value,
+        createdAt: date
+    };
+
+    fetch("http://localhost:9090/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json; charset=utf-8"},
+        body: JSON.stringify(chat),
+    }).then(function (response) {
+        console.log(response)
+    });
+
     chatOutgoingContent.innerHTML = getSendMsgContent(inputTxt.value, time);
     chatContent.append(chatOutgoingContent);
     inputTxt.value = "";
