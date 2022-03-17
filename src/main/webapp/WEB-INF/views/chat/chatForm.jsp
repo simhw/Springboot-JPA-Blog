@@ -5,29 +5,27 @@
     <div class="row container d-flex justify-content-center">
         <div class="col-md-6">
             <div class="card card-bordered">
-
                 <div class="card-header">
                     <h4 class="card-title"><strong>메세지</strong></h4>
                 </div>
-
-                <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
-                     style="overflow-y: scroll !important; height:400px !important;">
-                    <div class="media media-chat"><img src="/image/chat_profile.png">
+                <div id="chat-content" class="ps-container ps-theme-default ps-active-y"
+                     style="overflow-y: scroll !important; height:600px !important;">
+                    <%-- 받은 메세지 --%>
+                    <div class="media media-chat">
+                        <img src="/image/chat_profile.png">
                         <div class="media-body">
                             <p>Hi How are you ...???</p>
-                            <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
                             <p class="meta">
-                                <time datetime="2018">23:58</time>
+                                <time datetime="2022">23:58</time>
                             </p>
                         </div>
                     </div>
+                    <%-- 보낸 메세지 --%>
                     <div class="media media-chat media-chat-reverse">
                         <div class="media-body">
                             <p>Hiii, I'm good.</p>
-                            <p>How are you doing?</p>
-                            <p>Long time no see! Tomorrow office. will be free on sunday.</p>
                             <p class="meta">
-                                <time datetime="2018">00:06</time>
+                                <time datetime="2022">00:06</time>
                             </p>
                         </div>
                     </div>
@@ -39,9 +37,7 @@
                     </div>
                 </div>
                 <div class="publisher bt-1 border-light">
-                    <img class="avatar avatar-xs"
-                         src="https://img.icons8.com/color/36/000000/administrator-male.png"
-                         alt="...">
+                    <img class="avatar avatar-xs" src="/image/chat_profile.png" alt="...">
                     <input id="chat-outgoing-txt" class="publisher-input" type="text">
                     <button id="chat-outgoing-btn" class="publisher-btn text-info" data-abc="true"><i
                             class="fa fa-paper-plane"></i></button>
