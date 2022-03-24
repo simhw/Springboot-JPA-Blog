@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../layout/header.jsp" %>
-
+<input type="hidden" id="user" value="${principal.user.idx}"/>
 <div class="container">
     <div class="row container d-flex justify-content-center">
         <div class="col-md-6">
